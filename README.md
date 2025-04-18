@@ -27,29 +27,23 @@ DEFAULT FOR l_person_num is 'XX'
 
 l_person_id = GET_CONTEXT(PERSON_ID, -1)
 
-
 if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) < 0 ) then
 (
 formula_message = 'KIT Start date should be less than KIT End date'
 formula_status = 'E'
 )
-
 else if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) > 9 ) then
 (
 formula_message = 'You can not apply more than 10 days for KIT days.'
 formula_status = 'E'
 )
-
 else if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) <= 9 ) then
 (
-        
-		
-        l_person_num = GET_VALUE_SET('MACE_KIT_DURATION_CHECK',
+       l_person_num = GET_VALUE_SET('MACE_KIT_DURATION_CHECK',
                                      '|=PERSON_ID=' || to_char(l_person_id)
                                      || '|KIT_START_DATE=' || to_char(KIT_Start_Date,'YYYYMMDD')
                                      || '|KIT_END_DATE=' || to_char(KIT_End_Date,'YYYYMMDD')
                                     )
-
          if(l_person_num||'XX' = 'XX') then
          (
           formula_message = 'Kit Day Duration should fall within your Parental Leave Duration' 
@@ -61,8 +55,7 @@ else if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) <= 9 ) then
                                         '|=PERSON_ID=' || to_char(l_person_id)
                                         || '|KIT_START_DATE=' || to_char(KIT_Start_Date,'YYYYMMDD')
                                         || '|KIT_END_DATE=' || to_char(KIT_End_Date,'YYYYMMDD')
-                                    )
-									
+                                    )						
 			  if(l_person_num_2||'XX' <> 'XX') then
               (
                  formula_message = 'Entered Kit Days should not overlap with existing KIT Days in System' 
@@ -70,11 +63,9 @@ else if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) <= 9 ) then
               )
 			  else
 		      (
-			     
 				 l_kit_db_sum = GET_VALUE_SET('MACE_KIT_DAYS_SUM',
                                         '|=PERSON_ID=' || to_char(l_person_id)
-                                    )
-				 				 
+                                    )			 
 			     if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) > 9- to_number(l_kit_db_sum) ) then
 				 (
 				    formula_message = 'Your existing Kit days count : '|| l_kit_db_sum || ' and you are applying for '|| to_char(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date )+1) ||' day/s which is exceeding 10 day limit'
@@ -82,7 +73,6 @@ else if(DAYS_BETWEEN( KIT_End_Date,KIT_Start_Date ) <= 9 ) then
 				 )
 				 ELSE
 				 (
-                                 
 				    formula_message = 'You have successfully saved KIT days entry'
                     formula_status = 'S'
 				 )
