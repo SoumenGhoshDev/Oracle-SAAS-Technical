@@ -87,6 +87,15 @@ formula_status = 'S'
 
 return formula_message, formula_status
 ```
+
+## Value Set: MACE_KIT_DURATION_CHECK
+
+![vs_1_2](/images/vs_1_2.png)
+
+
+
+
+
 ![vs_1_2](/images/vs_1_2.png)
 
 
