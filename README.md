@@ -21,7 +21,7 @@ To achieve this we have come up with below objects:
     - Sum of existing Kit Days
 
 Please find below the Fast Formula :
-``` SQL
+```SQL
 inputs are KIT_Start_Date(date), KIT_End_Date(date)
 DEFAULT FOR l_person_num is 'XX'
 
