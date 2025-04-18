@@ -97,4 +97,6 @@ formula_status = 'S'
 
 return formula_message, formula_status
 ```
+![vs_1_2](/images/vs_1_2.png)
+
 
