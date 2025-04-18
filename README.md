@@ -90,10 +90,19 @@ return formula_message, formula_status
 
 ## Value Set: MACE_KIT_DURATION_CHECK
 
-![vs_1_2](/images/vs_1_2.png)
+![vs_1_1](/images/vs_1_1.png)
 
 
+## Value Set: MACE_KIT_OVERLAP_CHECK
 
+![vs_2_1](/images/vs_2_1.png)
+
+## Value Set: MACE_KIT_DAYS_SUM
+
+![vs_3_1](/images/vs_3_1.png)
+
+
+ddd
 
 
 ![vs_1_2](/images/vs_1_2.png)
