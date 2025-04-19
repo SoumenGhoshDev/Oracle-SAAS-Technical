@@ -222,3 +222,12 @@ AND peevf_end.input_value_id = pivf_end.input_value_id
 AND peevf_st.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
 AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
 ```
+### Some Example Error Mesaages:
+
+![Error1](/images/Error1.jpg)
+
+![Error2](/images/Error2.jpg)
+
+![Error3(/images/Error3.jpg)
+
+![Error4](/images/Error4.jpg)
