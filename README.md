@@ -99,7 +99,8 @@ Value Column Name: `papf.person_number`
 ID Column Name: `papf.person_number`
 
 WHERE Clause: 
-```   papf.person_id = apae.person_id
+```
+       papf.person_id = apae.person_id
    and apae.ABSENCE_TYPE_ID = aatft.ABSENCE_TYPE_ID
    and aatft.language = 'US'
    and trunc(sysdate) between papf.effective_start_date and papf.effective_end_date
@@ -116,12 +117,78 @@ and ROWNUM=1
 
 ![vs_2_1](/images/vs_2_1.png)
 
+From Clause: `per_all_people_f papf , pay_element_entries_f peef, pay_element_types_f petf, pay_input_values_f pivf_st, pay_input_values_f pivf_end, pay_element_entry_values_f peevf_st, pay_element_entry_values_f peevf_end`
+
+Value Column Name: `papf.person_number`
+
+ID Column Name: `papf.person_number`
+
+WHERE Clause: 
+```
+1=1
+and papf.person_id=:{PARAMETER.PERSON_ID}
+and papf.person_id = peef.person_id
+AND peef.element_type_id = petf.element_type_id
+AND TRUNC(peef.effective_start_date) BETWEEN petf.effective_start_date AND
+                                   petf.effective_end_date
+AND TRUNC(peef.effective_start_date) BETWEEN papf.effective_start_date AND  papf.effective_end_date
+AND TRUNC(sysdate) BETWEEN papf.effective_start_date AND papf.effective_end_date
+AND petf.base_element_name = 'MaceKITDay'
+AND pivf_st.element_type_id =  petf.element_type_id
+AND pivf_end.element_type_id =  petf.element_type_id
+AND pivf_st.base_name in ('KIT_Start_date')
+AND pivf_end.base_name in ('KIT_End_date')
+AND peevf_st.input_value_id = pivf_st.input_value_id
+AND peevf_end.input_value_id = pivf_end.input_value_id
+AND peevf_st.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
+AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
+AND (to_date(:{PARAMETER.KIT_START_DATE},'YYYYMMDD') BETWEEN TO_DATE(peevf_st.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS')
+                                    AND TO_DATE(peevf_end.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS')
+    OR  
+    to_date(:{PARAMETER.KIT_END_DATE},'YYYYMMDD') BETWEEN TO_DATE(peevf_st.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS')
+                                    AND TO_DATE(peevf_end.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS')
+									)
+ AND ROWNUM = 1
+```
+
 ### Value Set: MACE_KIT_DAYS_SUM
 
 ![vs_3_1](/images/vs_3_1.png)
 
+From Clause: `(SELECT to_number(LEVEL) as num FROM dual CONNECT BY LEVEL<=300) Num_Tab`
 
-ddd
+Value Column Name: `to_char(Num_Tab.num)`
+
+ID Column Name: `to_char(Num_Tab.num)`
+
+WHERE Clause: 
+```
+Num_Tab.num = (
+SELECT SUM((TO_DATE(peevf_end.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS')- TO_DATE(peevf_st.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS'))+1)
+FROM per_all_people_f papf ,
+pay_element_entries_f peef,
+pay_element_types_f petf,
+pay_input_values_f pivf_st,
+pay_input_values_f pivf_end,
+pay_element_entry_values_f peevf_st,
+pay_element_entry_values_f peevf_end
+where papf.person_id=:{PARAMETER.PERSON_ID}
+AND papf.person_id = peef.person_id
+AND peef.element_type_id = petf.element_type_id
+AND TRUNC(peef.effective_start_date) BETWEEN petf.effective_start_date AND
+                                   petf.effective_end_date
+AND TRUNC(peef.effective_start_date) BETWEEN papf.effective_start_date AND  papf.effective_end_date
+AND TRUNC(SYSDATE) BETWEEN papf.effective_start_date AND papf.effective_end_date
+AND petf.base_element_name = 'MaceKITDay'
+AND pivf_st.element_type_id =  petf.element_type_id
+AND pivf_end.element_type_id =  petf.element_type_id
+AND pivf_st.base_name in ('KIT_Start_date')
+AND pivf_end.base_name in ('KIT_End_date')
+AND peevf_st.input_value_id = pivf_st.input_value_id
+AND peevf_end.input_value_id = pivf_end.input_value_id
+AND peevf_st.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
+AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID)
+```
 
 
 ![vs_1_2](/images/vs_1_2.png)
