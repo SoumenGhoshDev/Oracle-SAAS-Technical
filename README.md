@@ -229,11 +229,20 @@ AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
 ![Error1](/images/Error1.jpg)
 
 
+
+> Entry duration cannot exceed 10 days
+
 ![Error2](/images/Error2.jpg)
-Entry duration cannot exceed 10 days
+
+
+
+> Overlapping Error
 
 ![Error3](/images/Error3.jpg)
-Overlapping error
+
+
+
+>Limit exceeding upon checking database
 
 ![Error4](/images/Error4.jpg)
-limit exceeding upon checking database
+
