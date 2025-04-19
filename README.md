@@ -224,8 +224,9 @@ AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
 ```
 ### Some Example Error Mesaages:
 
+> Start Date cannot be later than End Date
 ![Error1](/images/Error1.jpg)
-Start Date cannot be later than End Date
+
 
 ![Error2](/images/Error2.jpg)
 Entry duration cannot exceed 10 days
