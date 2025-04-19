@@ -190,7 +190,35 @@ AND peevf_st.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
 AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID)
 ```
 
+### Additional Info
 
-![vs_1_2](/images/vs_1_2.png)
+#### Query to find out existing KIT Days 
 
-
+``` SQL
+select papf.person_number,petf.base_element_name,  peef.effective_start_date, 
+       peevf_st.SCREEN_ENTRY_VALUE st_date, peevf_end.SCREEN_ENTRY_VALUE end_date
+  from per_all_people_f papf , 
+       pay_element_entries_f peef, 
+	   pay_element_types_f petf, 
+	   pay_input_values_f pivf_st, 
+	   pay_input_values_f pivf_end, 
+	   pay_element_entry_values_f peevf_st, 
+       pay_element_entry_values_f peevf_end
+ where 1=1
+and papf.person_number = '20030670'
+and papf.person_id = peef.person_id
+AND peef.element_type_id = petf.element_type_id
+AND TRUNC(peef.effective_start_date) BETWEEN petf.effective_start_date AND
+                                   petf.effective_end_date
+AND TRUNC(peef.effective_start_date) BETWEEN papf.effective_start_date AND  papf.effective_end_date
+AND TRUNC(sysdate) BETWEEN papf.effective_start_date AND papf.effective_end_date
+AND petf.base_element_name = 'MaceKITDay'
+AND pivf_st.element_type_id =  petf.element_type_id
+AND pivf_end.element_type_id =  petf.element_type_id
+AND pivf_st.base_name in ('KIT_Start_date')
+AND pivf_end.base_name in ('KIT_End_date')
+AND peevf_st.input_value_id = pivf_st.input_value_id
+AND peevf_end.input_value_id = pivf_end.input_value_id
+AND peevf_st.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
+AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
+```
