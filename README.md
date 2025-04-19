@@ -225,9 +225,13 @@ AND peevf_end.ELEMENT_ENTRY_ID =peef.ELEMENT_ENTRY_ID
 ### Some Example Error Mesaages:
 
 ![Error1](/images/Error1.jpg)
+Start Date cannot be later than End Date
 
 ![Error2](/images/Error2.jpg)
+Entry duration cannot exceed 10 days
 
-![Error3(/images/Error3.jpg)
+![Error3](/images/Error3.jpg)
+Overlapping error
 
 ![Error4](/images/Error4.jpg)
+limit exceeding upon checking database
