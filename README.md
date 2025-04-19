@@ -92,12 +92,12 @@ return formula_message, formula_status
 
 ![vs_1_1](/images/vs_1_1.png)
 
-From Clause: 
-```
-ANC_PER_ABS_ENTRIES apae, per_all_people_f papf, ANC_ABSENCE_TYPES_F_TL aatft
-```
+From Clause: `ANC_PER_ABS_ENTRIES apae, per_all_people_f papf, ANC_ABSENCE_TYPES_F_TL aatft`
+
 Value Column Name: `papf.person_number`
+
 ID Column Name: `papf.person_number`
+
 WHERE Clause: 
 ```   papf.person_id = apae.person_id
    and apae.ABSENCE_TYPE_ID = aatft.ABSENCE_TYPE_ID
