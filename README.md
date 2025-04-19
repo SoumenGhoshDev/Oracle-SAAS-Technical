@@ -92,9 +92,12 @@ return formula_message, formula_status
 
 ![vs_1_1](/images/vs_1_1.png)
 
-From Clause: ```ANC_PER_ABS_ENTRIES apae, per_all_people_f papf, ANC_ABSENCE_TYPES_F_TL aatft```
-Value Column Name: papf.person_number
-ID Column Name: papf.person_number
+From Clause: 
+```
+ANC_PER_ABS_ENTRIES apae, per_all_people_f papf, ANC_ABSENCE_TYPES_F_TL aatft
+```
+Value Column Name: `papf.person_number`
+ID Column Name: `papf.person_number`
 WHERE Clause: 
 ```   papf.person_id = apae.person_id
    and apae.ABSENCE_TYPE_ID = aatft.ABSENCE_TYPE_ID
@@ -106,7 +109,8 @@ WHERE Clause:
    and processing_status = 'P'
    and to_char(apae.START_DATE,'YYYYMMDD') <= :{PARAMETER.KIT_START_DATE}
    and to_char(apae.END_DATE,'YYYYMMDD') >= :{PARAMETER.KIT_END_DATE}
-and ROWNUM=1 ```
+and ROWNUM=1
+```
 
 ### Value Set: MACE_KIT_OVERLAP_CHECK
 
