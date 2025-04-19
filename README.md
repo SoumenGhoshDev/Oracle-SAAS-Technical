@@ -99,7 +99,7 @@ Value Column Name: `papf.person_number`
 ID Column Name: `papf.person_number`
 
 WHERE Clause: 
-```
+``` SQL
        papf.person_id = apae.person_id
    and apae.ABSENCE_TYPE_ID = aatft.ABSENCE_TYPE_ID
    and aatft.language = 'US'
@@ -124,7 +124,7 @@ Value Column Name: `papf.person_number`
 ID Column Name: `papf.person_number`
 
 WHERE Clause: 
-```
+``` SQL
 1=1
 and papf.person_id=:{PARAMETER.PERSON_ID}
 and papf.person_id = peef.person_id
@@ -162,7 +162,7 @@ Value Column Name: `to_char(Num_Tab.num)`
 ID Column Name: `to_char(Num_Tab.num)`
 
 WHERE Clause: 
-```
+``` SQL
 Num_Tab.num = (
 SELECT SUM((TO_DATE(peevf_end.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS')- TO_DATE(peevf_st.SCREEN_ENTRY_VALUE,'YYYY-MM-DD HH24:MI:SS'))+1)
 FROM per_all_people_f papf ,
