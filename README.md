@@ -88,16 +88,31 @@ formula_status = 'S'
 return formula_message, formula_status
 ```
 
-## Value Set: MACE_KIT_DURATION_CHECK
+### Value Set: MACE_KIT_DURATION_CHECK
 
 ![vs_1_1](/images/vs_1_1.png)
 
+From Clause: ```ANC_PER_ABS_ENTRIES apae, per_all_people_f papf, ANC_ABSENCE_TYPES_F_TL aatft```
+Value Column Name: papf.person_number
+ID Column Name: papf.person_number
+WHERE Clause: 
+```   papf.person_id = apae.person_id
+   and apae.ABSENCE_TYPE_ID = aatft.ABSENCE_TYPE_ID
+   and aatft.language = 'US'
+   and trunc(sysdate) between papf.effective_start_date and papf.effective_end_date
+   and to_char(papf.person_id) = :{PARAMETER.PERSON_ID}
+   and aatft.name IN ('Maternity Leave','Paternity Leave','Adoption Leave','Paternity Adoption Leave')
+   and apae.APPROVAL_STATUS_CD = 'APPROVED'
+   and processing_status = 'P'
+   and to_char(apae.START_DATE,'YYYYMMDD') <= :{PARAMETER.KIT_START_DATE}
+   and to_char(apae.END_DATE,'YYYYMMDD') >= :{PARAMETER.KIT_END_DATE}
+and ROWNUM=1 ```
 
-## Value Set: MACE_KIT_OVERLAP_CHECK
+### Value Set: MACE_KIT_OVERLAP_CHECK
 
 ![vs_2_1](/images/vs_2_1.png)
 
-## Value Set: MACE_KIT_DAYS_SUM
+### Value Set: MACE_KIT_DAYS_SUM
 
 ![vs_3_1](/images/vs_3_1.png)
 
